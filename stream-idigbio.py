@@ -24,7 +24,7 @@ while page <= 1:
             response_data = response.json(strict=False)
             records = response_data["items"]
             for record in records:
-                print(record, file=sys.stdout)
+                print(record["data"], file=sys.stdout)
         except ValueError as e:
             print(e, file=sys.stderr)
             continue
