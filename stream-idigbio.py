@@ -1,4 +1,5 @@
 import errno
+import json
 import sys
 import time
 import requests as rq
@@ -34,7 +35,7 @@ while True:
             response_data = response.json(strict=False)
             records = response_data["items"]
             for record in records:
-                print(record["data"], file=sys.stdout)
+                print(json.dumps(record["data"]), file=sys.stdout)
         except ValueError as e:
             print(e, file=sys.stderr)
             continue
