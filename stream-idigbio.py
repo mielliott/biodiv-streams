@@ -6,6 +6,7 @@ import requests as rq
 
 PAGE_SIZE = 1000
 RETRY_DELAY_IN_SECONDS = 2
+TIMEOUT_IN_SECONDS = 30
 
 def make_query(page, page_size):
     return {
@@ -18,7 +19,7 @@ page = 0
 while True:
     try:
         query = make_query(page, PAGE_SIZE)
-        response = rq.post("http://search.idigbio.org/v2/search/records/", json=query)
+        response = rq.post("http://search.idigbio.org/v2/search/records/", json=query, timeout=TIMEOUT_IN_SECONDS)
     except rq.exceptions.Timeout as e:
         print(e, file=sys.stderr)
         print(f"Retrying in {RETRY_DELAY_IN_SECONDS} seconds...", file=sys.stderr)
