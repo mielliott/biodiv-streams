@@ -37,17 +37,16 @@ while True:
             records = response_data["results"]
             for record in records:
                 print(json.dumps(record), file=sys.stdout)
+
+            # If this is the last page of records
+            if response_data["endOfRecords"]:
+                break
+
+            page += 1
         except ValueError as e:
             print(e, file=sys.stderr)
             continue
     except IOError as e:  
-        if e.errno == errno.EPIPE:
-            break
-        else:
+        if e.errno != errno.EPIPE:
             print(e, file=sys.stderr)
-
-    # If this is the last page of records
-    if response_data["endOfRecords"]:
         break
-
-    page += 1

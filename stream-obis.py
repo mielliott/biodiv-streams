@@ -11,7 +11,6 @@ TIMEOUT_IN_SECONDS = 30
 after = "-1"
 while True:
     try:
-        query = make_query(page, PAGE_SIZE)
         response = rq.get(f"https://api.obis.org/v3/occurrence?size={PAGE_SIZE}&after={after}", timeout=TIMEOUT_IN_SECONDS)
     except rq.exceptions.Timeout as e:
         print(e, file=sys.stderr)
