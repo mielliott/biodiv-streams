@@ -25,7 +25,7 @@ while True:
         print(f"Retrying in {RETRY_DELAY_IN_SECONDS} seconds...", file=sys.stderr)
         continue
 
-    if response.status_code != 200:
+    if not response:
         print(f"Received unexpected response status code {response.status_code}", file=sys.stderr)
         time.sleep(RETRY_DELAY_IN_SECONDS)
         print(f"Retrying in {RETRY_DELAY_IN_SECONDS} seconds...", file=sys.stderr)
